@@ -10,6 +10,7 @@ source:
   sha256: b65c1f93d688b85a9410afa824192a1ddc39da359b04a0bd2cbd3874e84d4994
 
 build:
+  skip: True  # [py<39]
   entry_points:
     - oxmsg = oxmsg.cli:oxmsg
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
