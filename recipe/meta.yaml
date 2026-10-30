@@ -1,27 +1,27 @@
 {% set name = "python-oxmsg" %}
-{% set version = "0.0.1" %}
+{% set version = "0.0.2" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/python_oxmsg-{{ version }}.tar.gz
-  sha256: b65c1f93d688b85a9410afa824192a1ddc39da359b04a0bd2cbd3874e84d4994
+  sha256: a6aff4deb1b5975d44d49dab1d9384089ffeec819e19c6940bc7ffbc84775fad
 
 build:
-  skip: True  # [py<39]
+  number: 0
+  # osx-64 is outside the current build-target scope.
+  skip: true  # [py<39 or (osx and x86_64)]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - oxmsg = oxmsg.cli:oxmsg
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
 
 requirements:
   host:
     - python
     - setuptools >=61.0.0
     - pip
-    - wheel
   run:
     - python
     - click
@@ -36,7 +36,6 @@ test:
     - oxmsg --help
   requires:
     - pip
-    - python
 
 about:
   home: https://github.com/scanny/python-oxmsg
