@@ -11,8 +11,6 @@ source:
 
 build:
   number: 0
-  # osx-64 is outside the current build-target scope.
-  skip: true  # [py<39 or (osx and x86_64)]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - oxmsg = oxmsg.cli:oxmsg
